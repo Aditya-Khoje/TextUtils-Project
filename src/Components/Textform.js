@@ -12,6 +12,17 @@ export default function Textform(props) {
     let newText = text.toLowerCase();
     setText(newText);
   };
+
+  const handleExtraSpaces = () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+  };
+
+  const handleCopy = () => {
+    var text = document.getElementById("myBox");
+    text.select();
+    navigator.clipboard.writeText(text.value);
+  };
   const handleOnChange = (event) => {
     // console.log("On Chnage");
     setText(event.target.value);
@@ -36,6 +47,12 @@ export default function Textform(props) {
         </button>
         <button className="btn btn-primary mx-2" onClick={handleLowerClick}>
           Convert To Lowercase
+        </button>
+        <button className="btn btn-primary mx-2" onClick={handleCopy}>
+          Copy
+        </button>
+        <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>
+          Remove Extra Spaces
         </button>
       </div>
       <div className="container my-3">
