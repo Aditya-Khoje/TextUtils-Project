@@ -13,6 +13,11 @@
   list-style: none;
 }
 
+.com {
+  padding: 65px;
+  /* background-color: rgb(186, 185, 185); */
+}
+
 .wrapper .icon {
   position: relative;
   background: #ffffff;
