@@ -6,22 +6,31 @@ export default function Textform(props) {
     // console.log("Uppercase was Clicked" + text);
     let newText = text.toUpperCase();
     setText(newText);
+    props.setAlerti("Converted to Upper Case", "success");
   };
   const handleLowerClick = () => {
     // console.log("Uppercase was Clicked" + text);
     let newText = text.toLowerCase();
     setText(newText);
+    props.setAlerti("Converted to Lower Case", "success");
   };
 
   const handleExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
+    props.setAlerti("Removed Extra Spaces", "success");
   };
 
-  const handleCopy = (props) => {
+  const handleCopy = () => {
     var text = document.getElementById("myBox");
     text.select();
     navigator.clipboard.writeText(text.value);
+    props.setAlerti("Copied to Clipboard", "success");
+  };
+  const clearText = () => {
+    let newText = "";
+    setText(newText);
+    props.setAlerti("Cleared Text", "success");
   };
   const handleOnChange = (event) => {
     // console.log("On Chnage");
@@ -62,6 +71,9 @@ export default function Textform(props) {
         </button>
         <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>
           Remove Extra Spaces
+        </button>
+        <button className="btn btn-primary mx-2" onClick={clearText}>
+          Clear Text
         </button>
       </div>
       <div

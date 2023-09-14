@@ -4,6 +4,7 @@ import Footer from "./Components/Footer";
 import Textform from "./Components/Textform";
 import About from "./Components/About";
 import { useState, useSyncExternalStore } from "react";
+import Alerts from "./Components/Alerts";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -11,6 +12,18 @@ function App() {
   const [toggleTextColor, setToggleTextColor] = useState({
     color: "black",
   });
+  const [alert, setAlert] = useState(null);
+
+  const setAlerti = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+
+    setTimeout(() => {
+      setAlert(null);
+    }, 1500);
+  };
 
   const toggleMode = () => {
     if (mode == "dark") {
@@ -20,6 +33,7 @@ function App() {
         color: "black",
       });
       document.body.style.backgroundColor = "white";
+      setAlerti("Light Mode has been enabled", "success");
     }
     if (mode == "light") {
       setMode("dark");
@@ -28,6 +42,7 @@ function App() {
         color: "white",
       });
       document.body.style.backgroundColor = "#042743";
+      setAlerti("Dark Mode has been enabled", "success");
     }
   };
 
@@ -41,7 +56,12 @@ function App() {
         modeText={modeText}
         toggleTextColor={toggleTextColor}
       />
-      <Textform heading="Enter Text To Analyze" mode={mode} />
+      <Alerts alert={alert} />
+      <Textform
+        heading="Enter Text To Analyze"
+        mode={mode}
+        setAlerti={setAlerti}
+      />
       {/* <About /> */}
       <Footer />
     </>
