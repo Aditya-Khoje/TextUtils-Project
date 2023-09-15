@@ -50,7 +50,7 @@ export default function Textform(props) {
           <label htmlFor="Text" className="form-label"></label>
           <textarea
             style={{
-              backgroundColor: props.mode == "dark" ? "gray" : "white",
+              backgroundColor: props.mode == "dark" ? "#4e4c4c" : "white",
               color: props.mode == "dark" ? "white" : "black",
             }}
             className="form-control"
