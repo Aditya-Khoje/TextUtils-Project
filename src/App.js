@@ -4,6 +4,15 @@ import Footer from "./Components/Footer";
 import Textform from "./Components/Textform";
 import About from "./Components/About";
 import { useState, useSyncExternalStore } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  BrowserRouter,
+  Routes,
+} from "react-router-dom";
+
 import Alerts from "./Components/Alerts";
 
 function App() {
@@ -48,22 +57,32 @@ function App() {
 
   return (
     <>
-      <Navbar
-        title="TextUtils"
-        aboutText="About"
-        mode={mode}
-        toggleMode={toggleMode}
-        modeText={modeText}
-        toggleTextColor={toggleTextColor}
-      />
-      <Alerts alert={alert} />
-      <Textform
-        heading="Enter Text To Analyze"
-        mode={mode}
-        setAlerti={setAlerti}
-      />
-      {/* <About /> */}
-      <Footer />
+      <BrowserRouter>
+        <Navbar
+          title="TextUtils"
+          aboutText="About"
+          mode={mode}
+          toggleMode={toggleMode}
+          modeText={modeText}
+          toggleTextColor={toggleTextColor}
+        />
+        <Alerts alert={alert} />
+        <Routes>
+          <Route exact path="/about" element={<About />}></Route>
+          <Route
+            exact
+            path="/"
+            element={
+              <Textform
+                heading="Enter Text To Analyze"
+                mode={mode}
+                setAlerti={setAlerti}
+              />
+            }
+          ></Route>
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
   );
 }
