@@ -56,34 +56,32 @@ function App() {
   };
 
   return (
-    <>
-      <BrowserRouter>
-        <Navbar
-          title="TextUtils"
-          aboutText="About"
-          mode={mode}
-          toggleMode={toggleMode}
-          modeText={modeText}
-          toggleTextColor={toggleTextColor}
+    <BrowserRouter>
+      <Navbar
+        title="TextUtils"
+        aboutText="About"
+        mode={mode}
+        toggleMode={toggleMode}
+        modeText={modeText}
+        toggleTextColor={toggleTextColor}
+      />
+      <Alerts alert={alert} />
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <Textform
+              heading="Enter Text To Analyze"
+              mode={mode}
+              setAlerti={setAlerti}
+            />
+          }
         />
-        <Alerts alert={alert} />
-        <Routes>
-          <Route exact path="/about" element={<About />}></Route>
-          <Route
-            exact
-            path="/"
-            element={
-              <Textform
-                heading="Enter Text To Analyze"
-                mode={mode}
-                setAlerti={setAlerti}
-              />
-            }
-          ></Route>
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </>
+        <Route exact path="/about" element={<About mode={mode} />} />
+      </Routes>
+      {/* <Footer /> */}
+    </BrowserRouter>
   );
 }
 

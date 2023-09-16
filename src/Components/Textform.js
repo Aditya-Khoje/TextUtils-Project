@@ -26,6 +26,7 @@ export default function Textform(props) {
     text.select();
     navigator.clipboard.writeText(text.value);
     props.setAlerti("Copied to Clipboard", "success");
+    document.getSelection().removeAllRanges();
   };
   const clearText = () => {
     let newText = "";
@@ -50,7 +51,7 @@ export default function Textform(props) {
           <label htmlFor="Text" className="form-label"></label>
           <textarea
             style={{
-              backgroundColor: props.mode == "dark" ? "#4e4c4c" : "white",
+              backgroundColor: props.mode == "dark" ? "#13466e" : "white",
               color: props.mode == "dark" ? "white" : "black",
             }}
             className="form-control"
@@ -60,19 +61,39 @@ export default function Textform(props) {
             rows="10"
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-2" onClick={handleUpperClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-2 my-2"
+          onClick={handleUpperClick}
+        >
           Convert To Uppercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleLowerClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-2 my-2"
+          onClick={handleLowerClick}
+        >
           Convert To Lowercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleCopy}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-2 my-2"
+          onClick={handleCopy}
+        >
           Copy
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-2 my-2"
+          onClick={handleExtraSpaces}
+        >
           Remove Extra Spaces
         </button>
-        <button className="btn btn-primary mx-2" onClick={clearText}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-2 my-2"
+          onClick={clearText}
+        >
           Clear Text
         </button>
       </div>
@@ -85,11 +106,20 @@ export default function Textform(props) {
         <h2>Your Text Summary</h2>
 
         <p>
-          {text.split(" ").length} words
+          {
+            text.split(/\s+/).filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          words
           <br />
           {text.length} Characters
           <br />
-          {0.008 * text.split(" ").length} Minutes to read
+          {0.008 *
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}{" "}
+          Minutes to read
         </p>
 
         <h2>Preview</h2>
